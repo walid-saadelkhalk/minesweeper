@@ -103,10 +103,16 @@ class Grid:
                     if i < total_x-1 and j < total_y-1 and self.__matrice[i+1][j+1] != -1:
                         self.__matrice[i+1][j+1] += 1 
 
+    # fill the matrice with the mines and the hint numbers
+    def filled_matrice(self):
+        self.fill_matrice()
+        self.mine_in_matrice()
+        self.fill_number_hint()
+        return self.__matrice
+
 
 # grid = Grid('easy')
-# grid.fill_matrice()
-# grid.mine_in_matrice()
+# grid.filled_matrice()
 # print(grid.get_matrice())
     
     
