@@ -80,7 +80,28 @@ class Grid:
             else:
                 i -= 1
 
-
+    # Fill the matrice with the hint number around each cell clicked
+    def fill_number_hint(self):
+        total_x, total_y = self.matrice_size()
+        for i in range(total_x):
+            for j in range(total_y):
+                if self.__matrice[i][j] == -1:
+                    if i > 0 and j > 0 and self.__matrice[i-1][j-1] != -1:
+                        self.__matrice[i-1][j-1] += 1
+                    if i > 0 and self.__matrice[i-1][j] != -1:
+                        self.__matrice[i-1][j] += 1
+                    if i > 0 and j < total_y-1 and self.__matrice[i-1][j+1] != -1:
+                        self.__matrice[i-1][j+1] += 1
+                    if j > 0 and self.__matrice[i][j-1] != -1:
+                        self.__matrice[i][j-1] += 1
+                    if j < total_y-1 and self.__matrice[i][j+1] != -1:
+                        self.__matrice[i][j+1] += 1
+                    if i < total_x-1 and j > 0 and self.__matrice[i+1][j-1] != -1:
+                        self.__matrice[i+1][j-1] += 1
+                    if i < total_x-1 and self.__matrice[i+1][j] != -1:
+                        self.__matrice[i+1][j] += 1
+                    if i < total_x-1 and j < total_y-1 and self.__matrice[i+1][j+1] != -1:
+                        self.__matrice[i+1][j+1] += 1 
 
 
 # grid = Grid('easy')
