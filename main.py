@@ -9,7 +9,8 @@ while True :
         draw = True
         board = Board('hard')
         board.draw_matrice()
-        board.draw_hint()
+        board.draw_hints()
+        board.draw_mines()
 
     events = pygame.event.get()
     if pygame.event.Event(pygame.QUIT) in events:
