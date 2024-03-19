@@ -1,3 +1,5 @@
+import random
+
 '''
 Class Grid is a 2D array of cells. Each cell has a state and a position.
 The numbers of cells depends on the difficulty level of the game.
@@ -50,8 +52,14 @@ class Grid:
             for j in range(total_y):
                 self.__matrice[i].append(0)
 
+    def mine_number(self):
+        if self.__level == 'easy':
+            return 10
+        elif self.__level == 'medium':
+            return 40
+        elif self.__level == 'hard':
+            return 99
 
-    
 
 # grid = Grid('easy')
 # grid.fill_matrice()
