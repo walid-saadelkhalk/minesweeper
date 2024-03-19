@@ -1,4 +1,5 @@
 import random
+from Cell import Cell
 
 '''
 Class Grid is a 2D array of cells. Each cell has a state and a position.
@@ -45,7 +46,7 @@ class Grid:
         return total_x, total_y
     
     # Fill the matrice with information about the cells
-    def fill_matrice(self):
+    def initial_matrice(self):
         total_x, total_y = self.matrice_size()
         for i in range(total_x):
             self.__matrice.append([])
@@ -105,15 +106,21 @@ class Grid:
 
     # fill the matrice with the mines and the hint numbers
     def filled_matrice(self):
-        self.fill_matrice()
+        self.initial_matrice()
         self.mine_in_matrice()
         self.fill_number_hint()
-        return self.__matrice
 
 
-# grid = Grid('easy')
-# grid.filled_matrice()
-# print(grid.get_matrice())
+    # Fill the list of cells objects with objetcs of class Cell
+    def fill_list_cells_objects(self):
+        total_x, total_y = self.matrice_size()
+        for i in range(total_x):
+            for j in range(total_y):
+                cell = Cell(i, j, False)
+                self.__list_cells_objects.append(cell)
+    
+
+
     
     
     
