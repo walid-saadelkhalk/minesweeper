@@ -29,7 +29,7 @@ class Grid:
     def set_list_cells_objects(self, list_cells_objects):
         self.__list_cells_objects = list_cells_objects
 
-    
+    # Return the size of the matrice depending on the level
     def matrice_size(self):
         if self.__level == 'easy':
             total_x = 7
@@ -42,7 +42,20 @@ class Grid:
             total_y = 16
         return total_x, total_y
     
+    # Fill the matrice with information about the cells
+    def fill_matrice(self):
+        total_x, total_y = self.matrice_size()
+        for i in range(total_x):
+            self.__matrice.append([])
+            for j in range(total_y):
+                self.__matrice[i].append(0)
+
+
     
+
+# grid = Grid('easy')
+# grid.fill_matrice()
+# print(grid.get_matrice())
     
     
     
