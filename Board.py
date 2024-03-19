@@ -34,6 +34,9 @@ class Board:
         } 
         self.__mines_list = []
 
+    def get_button_list(self):
+        return self.__button_list
+
     # Draw the matrice of the game with rect 
     def draw_matrice(self):
         total_x, total_y = self.__grid.matrice_size()
@@ -77,3 +80,18 @@ class Board:
                     )
         for mines in self.__mines_list:
             mines.draw_image(screen)
+
+
+    def button_cell(self):
+        total_x, total_y = self.__grid.matrice_size()
+        for i in range(total_x):
+            for j in range(total_y):
+                button = Button(
+                    i * 30,
+                    j * 30,
+                    Image("./assets/square.png", (i * 30, j * 30)).get_image_surface(),
+                )
+                self.__button_list.append(button)
+                button.render(screen)  
+
+
