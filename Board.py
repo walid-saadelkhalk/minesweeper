@@ -18,9 +18,9 @@ screen.fill((255, 255, 255))
 
 
 class Board:
-    def __init__(self, level, event):
+    def __init__(self, level, x, y):
         self.__button_list = []
-        self.__game = StateGame(level, event)
+        self.__game = StateGame(level, x, y)
         # dictionnary with the color of the different figures
         self.__FIGURE_COLOR = {
             1: (0, 0, 255),
@@ -31,16 +31,16 @@ class Board:
             6: (0, 128, 128),
             7: (0, 0, 0),
             8: (128, 128, 128),
-        } 
+        }
         self.__mines_list = []
 
     def get_game(self):
         return self.__game
-    
+
     def get_button_list(self):
         return self.__button_list
 
-    # Draw the matrice of the game with rect 
+    # Draw the matrice of the game with rect
     def draw_matrice(self):
         total_x, total_y = self.__game.get_grid_object().matrice_size()
         for i in range(total_x):
@@ -57,7 +57,7 @@ class Board:
     # Draw the hint of the game that give the number of mines around the cell
     def draw_hints(self):
         total_x, total_y = self.__game.get_grid_object().matrice_size()
-        self.__game.get_grid_object().filled_matrice()
+        self.__game.get_grid_object()
         for i in range(total_x):
             for j in range(total_y):
                 value = self.__game.get_grid_object().get_matrice()[i][j]
@@ -69,7 +69,6 @@ class Board:
                         font = pygame.font.Font(None, 36)
                         text = font.render(str(value), 1, color)
                         screen.blit(text, (i * 30 + 9, j * 30 + 5))
-
 
     # Draw the mines in the matrice
     def draw_mines(self):
@@ -83,17 +82,26 @@ class Board:
         for mines in self.__mines_list:
             mines.draw_image(screen)
 
-
     def button_cell(self):
         total_x, total_y = self.__game.get_grid_object().matrice_size()
         for i in range(total_x):
             for j in range(total_y):
-                button = Button(
-                    i * 30,
-                    j * 30,
-                    Image("./assets/square.png", (i * 30, j * 30)).get_image_surface(),
-                )
-                self.__button_list.append(button)
-                button.draw(screen)
+                for cell in self.__game.get_grid_object().get_list_cells_objects():
+                    if cell.get_state() == False:
+                        button = Button(
+                            i * 30,
+                            j * 30,
+                            Image(
+                                "./assets/square.png", (i * 30, j * 30)
+                            ).get_image_surface(),
+                        )
+                        self.__button_list.append(button)
+                        button.draw(screen)
 
-
+    def load_board(self, x, y):
+        self.__game.initialize_game()
+        self.draw_matrice()
+        self.draw_mines()
+        self.draw_hints()
+        self.button_cell()
+        self.__game.make_a_click(x, y)

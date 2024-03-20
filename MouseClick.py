@@ -13,17 +13,17 @@ class MouseClick:
         self.__event = event
 
     def left_click(self):
-        if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == 1:
+        if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == self.__LEFT:
             pos = pygame.mouse.get_pos()
-            list_pos_left = list(pos)
-            x = list_pos_left[0] // 30
-            y = list_pos_left[1] // 30
-            return x,y
+            x = pos[0] // 30
+            y = pos[1] // 30
+            return x, y
+        return -1, -1
     
-    def right_click(self, event):
-        if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == 3:
+    def right_click(self):
+        if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == self.__RIGHT:
             pos = pygame.mouse.get_pos()
-            list_pos_right = list(pos)
-            x = list_pos_right[0] // 30
-            y = list_pos_right[1] // 30
-            return x,y
+            x = pos[0] // 30
+            y = pos[1] // 30
+            return x, y
+        return None, None
