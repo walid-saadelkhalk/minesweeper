@@ -24,7 +24,7 @@ class StateGame:
 
     # when the only cells left are mines
     def win(self, x, y):
-        for cell in self.__grid_object.list_cells_objects:
+        for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_state() == False:
                 cell.set_state(True)
                 if self.__grid_object.get_matrice()[x][y] == -1:
@@ -43,7 +43,7 @@ class StateGame:
         for i in range(x - 1, x + 2):
             for j in range(y - 1, y + 2):
                 if i >= 0 and i <= total_x and j >= 0 and j <= total_y :
-                    for cell in self.__grid_object.list_cells_objects:
+                    for cell in self.__grid_object.get_list_cells_objects():
                         if cell.get_state() == False:
                             if cell.get_position() == (i, j):
                                 cell.set_state(True)
@@ -53,7 +53,7 @@ class StateGame:
     # When the player click on a cell
     def make_a_click(self):
         x, y = self.__mouse_click.left_click()
-        for cell in self.__grid_object.list_cells_objects:
+        for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
                 cell.set_state(True)
                 if self.__grid_object.get_matrice()[x][y] == 0:
