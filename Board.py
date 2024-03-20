@@ -92,6 +92,6 @@ class Board:
                     Image("./assets/square.png", (i * 30, j * 30)).get_image_surface(),
                 )
                 self.__button_list.append(button)
-                button.render(screen)  
+                button.draw(screen)
 
 
