@@ -26,6 +26,7 @@ class StateGame:
                     return True
                 
     def initialize_game(self):
+        self.__grid_object.set_matrice([])
         self.__grid_object.filled_matrice()
         self.__grid_object.fill_list_cells_objects()
     

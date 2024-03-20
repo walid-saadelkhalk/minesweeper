@@ -60,16 +60,15 @@ class Board:
         self.__game.get_grid_object().filled_matrice()
         for i in range(total_x):
             for j in range(total_y):
-                if (
-                    self.__game.get_grid_object().get_matrice()[i][j] != -1
-                    and self.__game.get_grid_object().get_matrice()[i][j] != 0
-                ):
-                    color = self.color_figures(self.__game.get_grid_object().get_matrice()[i][j])
-                    font = pygame.font.Font(None, 36)
-                    text = font.render(
-                        str(self.__game.get_grid_object().get_matrice()[i][j]), 1, color
-                    )
-                    screen.blit(text, (i * 30 + 9, j * 30 + 5))
+                value = self.__game.get_grid_object().get_matrice()[i][j]
+                if value != -1 and value != 0:
+                    if value < 1 or value > 8:
+                        print(f"Invalid value at position ({i}, {j}): {value}")
+                    else:
+                        color = self.color_figures(value)
+                        font = pygame.font.Font(None, 36)
+                        text = font.render(str(value), 1, color)
+                        screen.blit(text, (i * 30 + 9, j * 30 + 5))
 
 
     # Draw the mines in the matrice
