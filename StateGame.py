@@ -7,15 +7,28 @@ It allows to manage the game.
 '''
 
 class StateGame:
-    def __init__(self, level, event):
+    def __init__(self, level, x, y):
         self.__grid_object = Grid(level)
-        self.__mouse_click = MouseClick(event)
+        self.__x = x
+        self.__y = y
 
     def get_grid_object(self):
         return self.__grid_object
 
     def set_grid_object(self, grid_object):
         self.__grid_object = grid_object
+
+    def get_x(self):
+        return self.__x
+    
+    def set_x(self, x):
+        self.__x = x
+
+    def get_y(self):
+        return self.__y
+    
+    def set_y(self, y):
+        self.__y = y
 
     # when the player click on a mine
     def lose(self, x, y):
@@ -51,8 +64,8 @@ class StateGame:
                                     self.next_move()
                             
     # When the player click on a cell
-    def make_a_click(self):
-        x, y = self.__mouse_click.left_click()
+    def make_a_click(self, x, y):
+
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
                 cell.set_state(True)

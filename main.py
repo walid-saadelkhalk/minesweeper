@@ -13,15 +13,14 @@ while True :
         if event.type == pygame.QUIT:
             pygame.quit()
             quit()
+        mouse = MouseClick(event)
+        x, y = mouse.left_click()
+        x, y = mouse.right_click()
 
-        mouse_click = MouseClick(event)
-        pos_left_click = mouse_click.left_click()
-        
-        if draw == False:
-            draw = True
-            start_game = Board('easy', event)
-            start_game.load_board()
-
+    if draw == False:
+        draw = True
+        start_game = Board('easy', x, y)
+        start_game.load_board(x, y)
 
 
     pygame.display.flip()

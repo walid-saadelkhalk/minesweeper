@@ -18,9 +18,9 @@ screen.fill((255, 255, 255))
 
 
 class Board:
-    def __init__(self, level, event):
+    def __init__(self, level, x, y):
         self.__button_list = []
-        self.__game = StateGame(level, event)
+        self.__game = StateGame(level, x, y)
         # dictionnary with the color of the different figures
         self.__FIGURE_COLOR = {
             1: (0, 0, 255),
@@ -57,7 +57,7 @@ class Board:
     # Draw the hint of the game that give the number of mines around the cell
     def draw_hints(self):
         total_x, total_y = self.__game.get_grid_object().matrice_size()
-        self.__game.get_grid_object().filled_matrice()
+        self.__game.get_grid_object()
         for i in range(total_x):
             for j in range(total_y):
                 value = self.__game.get_grid_object().get_matrice()[i][j]
@@ -98,10 +98,10 @@ class Board:
                         self.__button_list.append(button)
                         button.draw(screen)
 
-    def load_board(self):
+    def load_board(self, x, y):
         self.__game.initialize_game()
         self.draw_matrice()
-        self.draw_hints()
         self.draw_mines()
+        self.draw_hints()
         self.button_cell()
-        self.__game.make_a_click()
+        self.__game.make_a_click(x, y)
