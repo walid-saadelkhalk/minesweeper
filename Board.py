@@ -1,6 +1,6 @@
 from collections.abc import Iterable
 import pygame
-from Grid import Grid
+from StateGame import StateGame
 from Button import Button
 from Image import Image
 
@@ -18,9 +18,9 @@ screen.fill((255, 255, 255))
 
 
 class Board:
-    def __init__(self, level):
+    def __init__(self, level, event):
         self.__button_list = []
-        self.__grid = Grid(level)
+        self.__game = StateGame(level, event)
         # dictionnary with the color of the different figures
         self.__FIGURE_COLOR = {
             1: (0, 0, 255),
@@ -34,12 +34,15 @@ class Board:
         } 
         self.__mines_list = []
 
+    def get_game(self):
+        return self.__game
+    
     def get_button_list(self):
         return self.__button_list
 
     # Draw the matrice of the game with rect 
     def draw_matrice(self):
-        total_x, total_y = self.__grid.matrice_size()
+        total_x, total_y = self.__game.get_grid_object().matrice_size()
         for i in range(total_x):
             for j in range(total_y):
                 pygame.draw.rect(screen, (0, 0, 0), (i * 30, j * 30, 30, 30), 1)
@@ -53,28 +56,28 @@ class Board:
 
     # Draw the hint of the game that give the number of mines around the cell
     def draw_hints(self):
-        total_x, total_y = self.__grid.matrice_size()
-        self.__grid.filled_matrice()
+        total_x, total_y = self.__game.get_grid_object().matrice_size()
+        self.__game.get_grid_object().filled_matrice()
         for i in range(total_x):
             for j in range(total_y):
                 if (
-                    self.__grid.get_matrice()[i][j] != -1
-                    and self.__grid.get_matrice()[i][j] != 0
+                    self.__game.get_grid_object().get_matrice()[i][j] != -1
+                    and self.__game.get_grid_object().get_matrice()[i][j] != 0
                 ):
-                    color = self.color_figures(self.__grid.get_matrice()[i][j])
+                    color = self.color_figures(self.__game.get_grid_object().get_matrice()[i][j])
                     font = pygame.font.Font(None, 36)
                     text = font.render(
-                        str(self.__grid.get_matrice()[i][j]), 1, color
+                        str(self.__game.get_grid_object().get_matrice()[i][j]), 1, color
                     )
                     screen.blit(text, (i * 30 + 9, j * 30 + 5))
 
 
     # Draw the mines in the matrice
     def draw_mines(self):
-        total_x, total_y = self.__grid.matrice_size()
+        total_x, total_y = self.__game.get_grid_object().matrice_size()
         for i in range(total_x):
             for j in range(total_y):
-                if self.__grid.get_matrice()[i][j] == -1:
+                if self.__game.get_grid_object().get_matrice()[i][j] == -1:
                     self.__mines_list.append(
                         Image("./assets/mines.png", (i * 30, j * 30))
                     )
@@ -83,7 +86,7 @@ class Board:
 
 
     def button_cell(self):
-        total_x, total_y = self.__grid.matrice_size()
+        total_x, total_y = self.__game.get_grid_object().matrice_size()
         for i in range(total_x):
             for j in range(total_y):
                 button = Button(
