@@ -18,5 +18,4 @@ class StateGame:
         for cell in self.__grid_object.list_cells_objects:
             if cell == -1 and cell.get_state() == False:
                 return True
-            elif  
             pass
