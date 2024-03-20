@@ -19,15 +19,11 @@ while True :
         
     if draw == False:
         draw = True
-        # board = Board('easy')
-        # board.draw_matrice()
-        # board.draw_hints()
-        # board.draw_mines()
         start_game = Board('easy', events)
         start_game.draw_matrice()
         start_game.draw_hints()
         start_game.draw_mines()
-        # game.button_cell()
+        start_game.button_cell()
 
 
     pygame.display.flip()
