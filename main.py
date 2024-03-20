@@ -7,7 +7,7 @@ while True :
     pygame.init()
     if draw == False:
         draw = True
-        board = Board('hard')
+        board = Board('easy')
         board.draw_matrice()
         board.draw_hints()
         board.draw_mines()
@@ -23,7 +23,7 @@ while True :
             #Left click
             if event.button == 1:
                 for button in board.get_button_list():
-                    if button.render(screen):
+                    if button.draw(screen):
                         print("Button clicked")
 
     pygame.display.flip()

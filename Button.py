@@ -32,9 +32,9 @@ class Button():
     #         self.clicked = False
     #     return action
 
-    def render(self, screen):
-        if self.active:
-            self.draw(screen)
-            return self.check_clicked()
-        else:
-            return False
+    # def render(self, screen):
+    #     if self.active:
+    #         self.draw(screen)
+    #         return self.check_clicked()
+    #     else:
+    #         return False
