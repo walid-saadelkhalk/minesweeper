@@ -1,4 +1,5 @@
 from Board import *
+from MouseClick import MouseClick
 import pygame
 
 draw = False
@@ -19,11 +20,7 @@ while True :
             pygame.quit()
             quit()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            #Left click
-            if event.button == 1:
-                for button in board.get_button_list():
-                    if button.render(screen):
-                        print("Button clicked")
+        mouse_click = MouseClick(event)
+        pos_left_click = mouse_click.left_click()
 
     pygame.display.flip()
