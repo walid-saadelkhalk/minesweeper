@@ -18,14 +18,12 @@ class StateGame:
         self.__grid_object = grid_object
 
     # when the player click on a mine
-    def lose(self):
-        x, y = self.__mouse_click.left_click()
+    def lose(self, x, y):
         if self.__grid_object.get_matrice()[x][y] == -1:
             return True
 
     # when the only cells left are mines
-    def win(self):
-        x, y = self.__mouse_click.left_click()
+    def win(self, x, y):
         for cell in self.__grid_object.list_cells_objects:
             if cell.get_state() == False:
                 cell.set_state(True)
@@ -40,18 +38,28 @@ class StateGame:
         self.__grid_object.fill_list_cells_objects()
 
     # When the player click on a "zero" cell #recursive function
-    def next_move(self):
-        x, y = self.__mouse_click.left_click()
+    def next_move(self, x, y):
         total_x, total_y = self.__grid_object.matrice_size()
-        if self.__grid_object.get_matrice()[x][y] == 0:
-            for i in range(x - 1, x + 2):
-                for j in range(y - 1, y + 2):
-                    if i >= 0 and i <= total_x and j >= 0 and j <= total_y :
-                        for cell in self.__grid_object.list_cells_objects:
-                            if cell.get_state() == False:
-                                if cell.get_position() == (i, j):
-                                    cell.set_state(True)
-                                    if self.__grid_object.get_matrice()[i][j] == 0:
-                                        self.next_move()
+        for i in range(x - 1, x + 2):
+            for j in range(y - 1, y + 2):
+                if i >= 0 and i <= total_x and j >= 0 and j <= total_y :
+                    for cell in self.__grid_object.list_cells_objects:
+                        if cell.get_state() == False:
+                            if cell.get_position() == (i, j):
+                                cell.set_state(True)
+                                if self.__grid_object.get_matrice()[i][j] == 0:
+                                    self.next_move()
                             
-
+    # When the player click on a cell
+    def make_a_click(self):
+        x, y = self.__mouse_click.left_click()
+        for cell in self.__grid_object.list_cells_objects:
+            if cell.get_position() == (x, y) and cell.get_state() == False:
+                cell.set_state(True)
+                if self.__grid_object.get_matrice()[x][y] == 0:
+                    self.next_move(x, y)
+                    self.win(x, y)
+                elif self.__grid_object.get_matrice()[x][y] == -1:
+                    self.lose(x, y)
+                else:
+                    self.win(x, y)
