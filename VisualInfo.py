@@ -1,14 +1,31 @@
+import pygame
+
 '''
 class 
 '''
 
-class Header():
-    def __init__(self, screen, x, y):   
-        self.__screen = screen
-        self.__x = x
-        self.__y = y
-        self.__font = pygame.font.Font(None, 36)
-        self.__text = self.__font.render("Minesweeper", True, (0, 0, 0))
-        self.__text_rect = self.__text.get_rect()
-        self.__text_rect.topleft = (self.__x, self.__y)
+class VisualInfo:
+    def __init__(self, screen_width, visual_info_height):
+        self.screen_width = screen_width
+        self.visual_info_height = visual_info_height
+        self.background_color = (192, 192, 192)
+        self.button_color = (0, 128, 0)
+        self.font = pygame.font.Font(None, 36)
+        self.buttons = []
+
+    def add_button(self, text, pos):
+        button_rect = pygame.Rect(pos[0], pos[1], 150, 50)
+        self.buttons.append((text, button_rect))
+
+    def draw(self, screen):
+        # # Draw background
+        # pygame.draw.rect(screen, self.background_color, (0, 0, self.screen_width, self.visual_info_height))
+
+        # Draw buttons
+        for text, rect in self.buttons:
+            pygame.draw.rect(screen, self.button_color, rect)
+            text_surface = self.font.render(text, True, (255, 255, 255))
+            text_rect = text_surface.get_rect(center=rect.center)
+            screen.blit(text_surface, text_rect)
+
         

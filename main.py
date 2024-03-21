@@ -11,7 +11,7 @@ while True :
 
     if draw == False:
         draw = True
-        start_game = Board('easy')
+        start_game = Board('hard')
         start_game.load_board()
 
     events = pygame.event.get()
