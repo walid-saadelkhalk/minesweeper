@@ -4,9 +4,6 @@ class Button():
         self.__hover_image = hover_image
         self.__rect = self.__image.get_rect()
         self.__rect.topleft = (x, y)
-        # self.__clicked = False
-        # self.__active = True
-        # self.__last_click_time = time.time()
     
     def get_rect(self):
         return self.__rect

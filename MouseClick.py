@@ -18,7 +18,7 @@ class MouseClick:
             x = pos[0] // 30
             y = pos[1] // 30
             return x, y
-        return 0, 0
+        return None, None
     
     def right_click(self):
         if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == self.__RIGHT:

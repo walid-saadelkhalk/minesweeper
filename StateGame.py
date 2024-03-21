@@ -9,26 +9,12 @@ It allows to manage the game.
 class StateGame:
     def __init__(self, level):
         self.__grid_object = Grid(level)
-        # self.__x = x
-        # self.__y = y
 
     def get_grid_object(self):
         return self.__grid_object
 
     def set_grid_object(self, grid_object):
         self.__grid_object = grid_object
-
-    # def get_x(self):
-    #     return self.__x
-    
-    # def set_x(self, x):
-    #     self.__x = x
-
-    # def get_y(self):
-    #     return self.__y
-    
-    # def set_y(self, y):
-    #     self.__y = y
 
     # when the player click on a mine
     def lose(self, x, y):
@@ -42,6 +28,8 @@ class StateGame:
                 cell.set_state(True)
                 if self.__grid_object.get_matrice()[x][y] == -1:
                     return True
+                return False
+
 
     # When the player want to restart the game
     def initialize_game(self):
@@ -61,18 +49,27 @@ class StateGame:
                             if cell.get_position() == (i, j):
                                 cell.set_state(True)
                                 if self.__grid_object.get_matrice()[i][j] == 0:
-                                    self.next_move(x, y)
+                                    self.next_move(i, j)
                             
     # When the player click on a cell
-    def make_a_click(self, x, y):
-        if x != -1 and y != -1:
-            for cell in self.__grid_object.get_list_cells_objects():
-                if cell.get_position() == (x, y) and cell.get_state() == False:
-                    cell.set_state(True)
-                    if self.__grid_object.get_matrice()[x][y] == 0:
-                        self.next_move(x, y)
-                        self.win(x, y)
-                    elif self.__grid_object.get_matrice()[x][y] == -1:
-                        self.lose(x, y)
-                    else:
-                        self.win(x, y)
+    def make_a_click(self, x, y, button_draw):
+        for cell in self.__grid_object.get_list_cells_objects():
+            if cell.get_position() == (x, y) and cell.get_state() == False:
+                cell.set_state(True)
+                # print(button_draw)
+                button_draw = False
+                # print(button_draw)
+                if self.__grid_object.get_matrice()[x][y] == 0:
+                    # print("Zero")
+                    self.next_move(x, y)
+                    if self.win(x, y):
+                        print("You win")
+                elif self.__grid_object.get_matrice()[x][y] == -1:
+                    # print('-1')
+                    if self.lose(x, y):
+                        print("You lose")
+                else:
+                    # print("Another number")
+                    if self.win(x, y):
+                        print("You win") 
+        return button_draw

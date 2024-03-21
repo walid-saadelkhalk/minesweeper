@@ -83,25 +83,25 @@ class Board:
             mines.draw_image(screen)
 
     def button_cell(self):
-        total_x, total_y = self.__game.get_grid_object().matrice_size()
-        for i in range(total_x):
-            for j in range(total_y):
-                for cell in self.__game.get_grid_object().get_list_cells_objects():
-                    if cell.get_state() == False:
-                        button = Button(
-                            i * 30,
-                            j * 30,
-                            Image(
-                                "./assets/square.png", (i * 30, j * 30)
-                            ).get_image_surface(),
-                        )
-                        self.__button_list.append(button)
-                        button.draw(screen)
+        self.__button_list = []
+        for cell in self.__game.get_grid_object().get_list_cells_objects():
+            if cell.get_state() == False:
+                i, j = cell.get_position()
+                button = Button(
+                    i * 30,
+                    j * 30,
+                    Image(
+                        "./assets/square.png", (i * 30, j * 30)
+                    ).get_image_surface(),
+                )
+                self.__button_list.append(button)
+                button.draw(screen)
+        print(self.__button_list)
 
     def load_board(self):
         self.__game.initialize_game()
         self.draw_matrice()
         self.draw_mines()
         self.draw_hints()
-        self.button_cell()
+        # self.button_cell()
         # self.__game.make_a_click(x, y)
