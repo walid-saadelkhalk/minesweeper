@@ -18,9 +18,9 @@ screen.fill((255, 255, 255))
 
 
 class Board:
-    def __init__(self, level, x, y):
+    def __init__(self, level):
         self.__button_list = []
-        self.__game = StateGame(level, x, y)
+        self.__game = StateGame(level)
         # dictionnary with the color of the different figures
         self.__FIGURE_COLOR = {
             1: (0, 0, 255),
@@ -98,10 +98,10 @@ class Board:
                         self.__button_list.append(button)
                         button.draw(screen)
 
-    def load_board(self, x, y):
+    def load_board(self):
         self.__game.initialize_game()
         self.draw_matrice()
         self.draw_mines()
         self.draw_hints()
         self.button_cell()
-        self.__game.make_a_click(x, y)
+        # self.__game.make_a_click(x, y)
