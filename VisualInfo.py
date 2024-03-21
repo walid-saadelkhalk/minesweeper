@@ -19,7 +19,11 @@ class VisualInfo:
 
     def draw(self, screen):
         # # Draw background
-        # pygame.draw.rect(screen, self.background_color, (0, 0, self.screen_width, self.visual_info_height))
+        print("Drawing visual info")
+        screen_width = self.screen_width.get_width()
+        print(screen_width)
+        print(self.visual_info_height)
+        pygame.draw.rect(screen, self.background_color, (0, 0, screen_width, self.visual_info_height))
 
         # Draw buttons
         for text, rect in self.buttons:
