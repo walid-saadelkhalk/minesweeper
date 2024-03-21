@@ -61,18 +61,23 @@ class StateGame:
                             if cell.get_position() == (i, j):
                                 cell.set_state(True)
                                 if self.__grid_object.get_matrice()[i][j] == 0:
-                                    self.next_move()
+                                    self.next_move(i, j)
                             
     # When the player click on a cell
     def make_a_click(self, x, y):
-
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
+                print(x, y)
+                print("b")
                 cell.set_state(True)
+                print(cell.get_state())
                 if self.__grid_object.get_matrice()[x][y] == 0:
+                    print("c")
                     self.next_move(x, y)
                     self.win(x, y)
                 elif self.__grid_object.get_matrice()[x][y] == -1:
+                    print("d")
                     self.lose(x, y)
                 else:
+                    print("e")
                     self.win(x, y)
