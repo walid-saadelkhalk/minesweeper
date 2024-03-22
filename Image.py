@@ -1,6 +1,13 @@
 import pygame
 
+'''
+class Image for the image of the game
+We can load the image and draw it
+'''
+
 class Image:
+    
+    #dico that contains the loaded images
     loaded_images = {}
 
     def __init__(self, image_path, image_pos):
@@ -18,6 +25,7 @@ class Image:
     def get_image_pos(self):
         return self.__image_pos
 
+    #method that get the image surface, and load it if it's not already loaded
     def get_image_surface(self):
         if self.__image_surface is None:
             # Check if the image is already loaded
@@ -29,13 +37,7 @@ class Image:
                 Image.loaded_images[self.__image_path] = self.__image_surface
         return self.__image_surface
 
+    #method that draw the image
     def draw_image(self, screen):
         screen.blit(self.get_image_surface(), self.__image_pos)
     
-    # def scale_image(self, scale):
-    #     self.__image_surface = pygame.transform.scale(self.get_image_surface(), scale)
-    
-    # def scale_image_bis(self, width_scale, height_scale):
-    #     original_surface = self.get_image_surface()
-    #     scaled_surface = pygame.transform.scale(original_surface, (int(original_surface.get_width() * width_scale), int(original_surface.get_height() * height_scale)))
-    #     self.__image_surface = scaled_surface
