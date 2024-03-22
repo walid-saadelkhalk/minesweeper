@@ -134,9 +134,12 @@ class Board:
 
         # Load visual info bar
         self.visual_info = VisualInfo(self.__screen, self.__visual_info_height)
-        self.visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
-        self.visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
-        self.visual_info.add_button(self.__screen.get_width() - self.__cell_size, 8, Image("./assets/question_mark.png", (0, 0)).get_image_surface())
+        back_button = self.visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
+        replay_button = self.visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
+        self.visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
+        
+
+
 
         self.visual_info.draw(self.__screen)
 
