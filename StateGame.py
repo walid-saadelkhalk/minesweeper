@@ -52,19 +52,24 @@ class StateGame:
                                     self.next_move(i, j)
                             
     # When the player click on a cell
-    def make_a_click(self, x, y, button_draw):
+    def make_a_click(self, x, y, button_draw, draw, first_click):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
-                cell.set_state(True)
-                button_draw = False
-                if self.__grid_object.get_matrice()[x][y] == 0:
-                    self.next_move(x, y)
-                    if self.win(x, y):
-                        print("You win")
-                elif self.__grid_object.get_matrice()[x][y] == -1:
-                    if self.lose(x, y):
-                        print("You lose")
+                if first_click == False and self.__grid_object.get_matrice()[x][y] == -1:
+                    pass
                 else:
-                    if self.win(x, y):
-                        print("You win") 
-        return button_draw
+                    first_click = True
+                    draw = True
+                    cell.set_state(True)
+                    button_draw = False
+                    if self.__grid_object.get_matrice()[x][y] == 0:
+                        self.next_move(x, y)
+                        if self.win(x, y):
+                            print("You win")
+                    elif self.__grid_object.get_matrice()[x][y] == -1:
+                        if self.lose(x, y):
+                            print("You lose")
+                    else:
+                        if self.win(x, y):
+                            print("You win") 
+            return button_draw, draw, first_click

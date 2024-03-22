@@ -5,11 +5,12 @@ from StateGame import StateGame
 
 draw = False
 button_draw = False
+first_click = False
 
 while True :
     pygame.init()
-    if draw == False:
-        draw = True
+    if draw == False and first_click == False:
+        # draw = True
         start_game = Board('easy')
         start_game.get_game().initialize_game()
 
@@ -25,7 +26,7 @@ while True :
         mouse = MouseClick(event)
         x_left, y_left = mouse.left_click()
         x_right, y_right = mouse.right_click()
-        button_draw = start_game.get_game().make_a_click(x_left, y_left, button_draw)
+        button_draw, draw, first_click = start_game.get_game().make_a_click(x_left, y_left, button_draw, draw, first_click)
 
 
     pygame.display.flip()
