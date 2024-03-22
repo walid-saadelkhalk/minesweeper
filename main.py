@@ -26,15 +26,13 @@ while True:
                 pygame.quit()
                 quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                print("coucou du cul")
                 mouse = MouseClick(event)
                 CURRENT_SCREEN = menu.selected_difficulty(mouse)
 
     elif CURRENT_SCREEN == GAME_SCREEN:
-        print(CURRENT_SCREEN)
         if not draw:
             draw = True
-            game = Board("easy")
+            game = Board(menu.get_selected_difficulty())
             game.get_game().initialize_game()
             game.size_screen()
         if not button_draw:
