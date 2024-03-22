@@ -14,6 +14,7 @@ while True:
         draw = True
         start_game = Board('medium')
         start_game.get_game().initialize_game()
+        start_game.size_screen()
 
     if not button_draw:
         button_draw = True
@@ -39,4 +40,4 @@ while True:
             #     game_window = GameWindow(difficulty)
             #     game_window.run_game()
 
-    pygame.display.update()  
+    pygame.display.flip()  

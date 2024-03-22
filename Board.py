@@ -123,9 +123,10 @@ class Board:
         else:
             print("The screen is not defined 3")
 
+
+    
     def load_board(self):
         # Load game board
-        self.size_screen()
         self.draw_matrice()
         self.draw_mines()
         self.draw_hints()
