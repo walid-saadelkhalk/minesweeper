@@ -13,6 +13,9 @@ class StateGraphic():
         self.__game = None
         self.__selected_difficulty = None 
 
+    def get_button_list(self): 
+        return self.__button_list
+
     def get_selected_difficulty(self):
         return self.__selected_difficulty
     
@@ -42,18 +45,14 @@ class StateGraphic():
         self.__button_list.append(hard_button)
 
     def selected_difficulty(self, mouse):
-        for button in self.__button_list: 
-            x, y = mouse.left_click()
-            print("dd", x, y)
+        difficulties = ["easy", "medium", "hard"]
+        for i in range(len(self.__button_list)): 
+            x, y = mouse.left_click_menu()
             if x is not None and y is not None:
-                print(x, y)
-                if button.get_position() == (x, y):
-                    if button == self.__button_list[0]:
-                        self.__selected_difficulty = "easy"
-                    elif button == self.__button_list[1]:
-                        self.__selected_difficulty = "medium"
-                    elif button == self.__button_list[2]:
-                        self.__selected_difficulty = "hard"
+                if self.__button_list[i].get_rect().collidepoint(x, y):
+                    self.__selected_difficulty = difficulties[i]
+                    return 1
+        return 0
 
         
                     

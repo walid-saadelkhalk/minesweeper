@@ -27,3 +27,11 @@ class MouseClick:
             y = (pos[1] - 50) // 30
             return x, y
         return None, None
+    
+    def left_click_menu(self):
+        if self.__event.type == pygame.MOUSEBUTTONDOWN and self.__event.button == self.__LEFT:
+            pos = pygame.mouse.get_pos()
+            x = pos[0]
+            y = pos[1]
+            return x, y
+        return None, None

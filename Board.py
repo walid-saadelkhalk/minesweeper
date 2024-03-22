@@ -125,7 +125,6 @@ class Board:
 
     def load_board(self):
         # Load game board
-        self.size_screen()
         self.draw_matrice()
         self.draw_mines()
         self.draw_hints()
