@@ -2,6 +2,7 @@ from Board import *
 from MouseClick import MouseClick
 import pygame
 from StateGame import StateGame
+from StateGraphic import StateGraphic
 
 draw = False
 button_draw = False
@@ -10,7 +11,7 @@ while True :
     pygame.init()
     if draw == False:
         draw = True
-        start_game = Board('easy')
+        start_game = Board('medium')
         start_game.get_game().initialize_game()
 
     if button_draw == False:
