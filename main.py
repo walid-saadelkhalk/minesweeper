@@ -5,7 +5,7 @@ from StateGraphic import StateGraphic
 
 pygame.init()
 draw = False
-hihi = False
+menu_draw = False
 button_draw = False
 
 # Stage of the game
@@ -13,14 +13,14 @@ MENU_SCREEN = 0
 GAME_SCREEN = 1
 
 CURRENT_SCREEN = MENU_SCREEN
-while True:
 
+while True:
+    # Menu screen where we can choose the difficulty of the game
     if CURRENT_SCREEN == MENU_SCREEN:
-        if not hihi:
+        if not menu_draw:
             menu = StateGraphic()
-            hihi = True
+            menu_draw = True
             menu.draw_menu()
-            menu.draw_buttons()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -29,6 +29,7 @@ while True:
                 mouse = MouseClick(event)
                 CURRENT_SCREEN = menu.selected_difficulty(mouse)
 
+    # Game screen where we can play the game
     elif CURRENT_SCREEN == GAME_SCREEN:
         if not draw:
             draw = True
