@@ -25,7 +25,7 @@ class StateGame:
     def win(self, x, y):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_state() == False:
-                cell.set_state(True)
+                # cell.set_state(True)
                 if self.__grid_object.get_matrice()[x][y] == -1:
                     return True
                 return False
