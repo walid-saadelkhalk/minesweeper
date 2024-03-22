@@ -7,6 +7,9 @@ class Button():
     
     def get_rect(self):
         return self.__rect
+    
+    def get_position(self):
+        return self.__rect.topleft
 
     # Methode that draw button
     def draw(self, surface):
