@@ -1,8 +1,10 @@
 import pygame
 
 class Image:
-    def __init__(self, image, image_pos):
-        self.__image = image
+    loaded_images = {}
+
+    def __init__(self, image_path, image_pos):
+        self.__image_path = image_path
         self.__image_pos = image_pos
         self.__image_surface = None 
 
@@ -18,7 +20,13 @@ class Image:
 
     def get_image_surface(self):
         if self.__image_surface is None:
-            self.__image_surface = pygame.image.load(self.__image).convert_alpha()
+            # Check if the image is already loaded
+            if self.__image_path in Image.loaded_images:
+                self.__image_surface = Image.loaded_images[self.__image_path]
+            else:
+                # if not load it and put it in the dico
+                self.__image_surface = pygame.image.load(self.__image_path).convert_alpha()
+                Image.loaded_images[self.__image_path] = self.__image_surface
         return self.__image_surface
 
     def draw_image(self, screen):

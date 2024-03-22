@@ -55,7 +55,6 @@ class Board:
         screen_height = matrice_size[1] * self.__cell_size + self.__visual_info_height
         self.__screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("Minesweeper")
-        self.__screen.fill((255, 255, 255))
         return self.__screen
 
     # Draw the matrice of the game with rect
@@ -111,14 +110,16 @@ class Board:
             print("The screen is not defined 2")
 
     def button_cell(self):
-        self.__button_list = []
-        for cell in self.__game.get_grid_object().get_list_cells_objects():
-            if cell.get_state() == False:
-                i, j = cell.get_position()
-                button = Button(i * self.__cell_size, j * self.__cell_size + self.__visual_info_height, Image("./assets/square.png", (i * self.__cell_size, j * self.__cell_size + self.__visual_info_height)).get_image_surface())
-                self.__button_list.append(button)
-                for button in self.__button_list:
-                    button.draw(self.__screen)
+        if self.__screen is not None:
+            self.__button_list = []
+            for cell in self.__game.get_grid_object().get_list_cells_objects():
+                if cell.get_state() == False:
+                    i, j = cell.get_position()
+                    button = Button(i * self.__cell_size, j * self.__cell_size + self.__visual_info_height, Image("./assets/square.png", (i * self.__cell_size, j * self.__cell_size + self.__visual_info_height)).get_image_surface())
+                    self.__button_list.append(button)
+            for button in self.__button_list:
+                button.draw(self.__screen)
+            pygame.display.update() 
         else:
             print("The screen is not defined 3")
 

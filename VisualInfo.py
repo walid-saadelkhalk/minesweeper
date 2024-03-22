@@ -12,7 +12,6 @@ class VisualInfo:
         self.screen_width = screen_width
         self.visual_info_height = visual_info_height
         self.background_color = (192, 192, 192)
-        self.button_color = (0, 0, 0)
         self.font = pygame.font.Font(None, 20)
         self.buttons = []
         self.bomb_counter = 0
