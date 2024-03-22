@@ -118,7 +118,6 @@ class Grid:
             for j in range(total_y):
                 cell = Cell(i, j, False)
                 self.__list_cells_objects.append(cell)
-                print(self.__list_cells_objects)
     
 
 

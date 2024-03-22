@@ -56,20 +56,15 @@ class StateGame:
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
                 cell.set_state(True)
-                # print(button_draw)
                 button_draw = False
-                # print(button_draw)
                 if self.__grid_object.get_matrice()[x][y] == 0:
-                    # print("Zero")
                     self.next_move(x, y)
                     if self.win(x, y):
                         print("You win")
                 elif self.__grid_object.get_matrice()[x][y] == -1:
-                    # print('-1')
                     if self.lose(x, y):
                         print("You lose")
                 else:
-                    # print("Another number")
                     if self.win(x, y):
                         print("You win") 
         return button_draw

@@ -96,12 +96,15 @@ class Board:
                 )
                 self.__button_list.append(button)
                 button.draw(screen)
-        print(self.__button_list)
+        # print(self.__button_list, 'total buttons:', len(self.__button_list))
 
     def load_board(self):
-        self.__game.initialize_game()
+        screen.fill((255, 255, 255))
         self.draw_matrice()
         self.draw_mines()
         self.draw_hints()
-        # self.button_cell()
-        # self.__game.make_a_click(x, y)
+        self.button_cell()
+
+
+
+

@@ -11,14 +11,11 @@ while True :
     if draw == False:
         draw = True
         start_game = Board('easy')
-        start_game.load_board()
+        start_game.get_game().initialize_game()
 
     if button_draw == False:
-        # print(button_draw)
-        # print("button")
         button_draw = True
-        # print(button_draw)
-        start_game.button_cell()
+        start_game.load_board()
 
     events = pygame.event.get()
     for event in events:
@@ -32,6 +29,3 @@ while True :
 
 
     pygame.display.flip()
-
-
-
