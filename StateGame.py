@@ -11,10 +11,12 @@ class StateGame:
         return self.__grid_object
     def set_grid_object(self, grid_object):
         self.__grid_object = grid_object
+
     # when the player click on a mine
     def lose(self, x, y):
         if self.__grid_object.get_matrice()[x][y] == -1:
             return True
+
     # when the only cells left are mines
     def win(self, x, y):
         for cell in self.__grid_object.get_list_cells_objects():
@@ -22,12 +24,14 @@ class StateGame:
                 if self.__grid_object.get_matrice()[x][y] == -1:
                     return True
                 return False
+
     # When the player want to restart the game
     def initialize_game(self):
         self.__grid_object.set_matrice([])
         self.__grid_object.filled_matrice()
         self.__grid_object.set_list_cells_objects([])
         self.__grid_object.fill_list_cells_objects()
+
     # When the player click on a "zero" cell #recursive function
     def next_move(self, x, y):
         total_x, total_y = self.__grid_object.matrice_size()
@@ -42,23 +46,30 @@ class StateGame:
                                     self.next_move(i, j)
                             
     # When the player click on a cell
-    def make_a_left_click(self, x, y, button_draw):
+    def make_a_left_click(self, x, y, button_draw, first_click):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
-                cell.set_state(True)
-                button_draw = False
-                if self.__grid_object.get_matrice()[x][y] == 0:
-                    self.next_move(x, y)
-                    if self.win(x, y):
-                        print("You win")
-                elif self.__grid_object.get_matrice()[x][y] == -1:
-                    if self.lose(x, y):
-                        print("You lose")
-                else:
-                    if self.win(x, y):
-                        print("You win") 
-        return button_draw
+                if self.__grid_object.get_matrice()[x][y] != 0 and first_click == False:
+                    print("You can't click on this cell")
+                    return None
+                else: 
+                    print('c')
+                    first_click = True
+                    cell.set_state(True)
+                    button_draw = False
+                    if self.__grid_object.get_matrice()[x][y] == 0:
+                        self.next_move(x, y)
+                        if self.win(x, y):
+                            print("You win")
+                    elif self.__grid_object.get_matrice()[x][y] == -1:
+                        if self.lose(x, y):
+                            print("You lose")
+                    else:
+                        if self.win(x, y):
+                            print("You win") 
+            return button_draw, first_click
 
+    # When the player click on a cell with the right click
     def make_a_right_click(self, x, y):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:

@@ -86,6 +86,7 @@ class Board:
                 self.__button_list.append(button)
                 button.draw(screen)
 
+    # Render the attributes of the cell
     def render_attributes(self, cell, screen):
         if cell is not None:
             i, j = cell.get_position()
@@ -103,7 +104,7 @@ class Board:
                 image = Image("./assets/doubt.png", (x, y))
                 image.draw_image(screen)
 
-
+    # Load the board with the cells
     def load_board(self, cell):
         screen.fill((255, 255, 255))
         self.draw_matrice()
