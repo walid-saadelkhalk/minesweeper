@@ -27,6 +27,7 @@ class Grid:
     
     def set_list_cells_objects(self, list_cells_objects):
         self.__list_cells_objects = list_cells_objects
+
     # Return the size of the matrice depending on the level
     def matrice_size(self):
         if self.__level == 'easy':
@@ -47,6 +48,7 @@ class Grid:
             self.__matrice.append([])
             for j in range(total_y):
                 self.__matrice[i].append(0)
+
     # Define randomly the number of mines depending on the level
     def mine_number(self):
         if self.__level == 'easy':
@@ -74,6 +76,7 @@ class Grid:
                 self.__matrice[x][y] = -1
             else:
                 i -= 1
+
     # Fill the matrice with the hint number around each cell clicked
     def fill_number_hint(self):
         total_x, total_y = self.matrice_size()
@@ -96,11 +99,13 @@ class Grid:
                         self.__matrice[i+1][j] += 1
                     if i < total_x-1 and j < total_y-1 and self.__matrice[i+1][j+1] != -1:
                         self.__matrice[i+1][j+1] += 1 
+
     # fill the matrice with the mines and the hint numbers
     def filled_matrice(self):
         self.initial_matrice()
         self.mine_in_matrice()
         self.fill_number_hint()
+
     # Fill the list of cells objects with objetcs of class Cell
     def fill_list_cells_objects(self):
         total_x, total_y = self.matrice_size()
