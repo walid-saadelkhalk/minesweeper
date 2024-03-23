@@ -1,3 +1,4 @@
+
 from collections.abc import Iterable
 import pygame
 from StateGame import StateGame
@@ -7,7 +8,6 @@ from VisualInfo import VisualInfo
 
 """
 class Board for the render of the matrice game 
-
 """
 
 # SCREEN_WIDTH = 930
@@ -45,7 +45,6 @@ class Board:
 
     def get_game(self):
         return self.__game
-
     def get_button_list(self):
         return self.__button_list
     
@@ -76,7 +75,7 @@ class Board:
     # Return the color of the figure depending on the number
     def color_figures(self, number):
         return self.__FIGURE_COLOR[number]
-
+    
     # Draw the hint of the game that give the number of mines around the cell
     def draw_hints(self):
         if self.__screen is not None:
@@ -119,12 +118,31 @@ class Board:
                     self.__button_list.append(button)
             for button in self.__button_list:
                 button.draw(self.__screen)
+            if cell.get_attributes() != 0:
+                    self.render_attributes(cell)
             pygame.display.update() 
         else:
             print("The screen is not defined 3")
+            
 
+    # Render the attributes of the cell
+    def render_attributes(self, cell):
+        if cell is not None:
+            i, j = cell.get_position()
+            x = i * 30
+            y = j * 30
+            button = Button(x, y, Image("./assets/square.png", (x, y)).get_image_surface())
+            button.draw(self.__screen)
 
-    
+            if cell.get_attributes() == 1:
+                image = Image("./assets/flag.png", (x, y))
+                image.draw_image(self.__screen)
+            elif cell.get_attributes() == 2:
+                image = Image("./assets/doubt.png", (x, y))
+                image.draw_image(self.__screen)
+
+    # Load the board with the cells
+
     def load_board(self):
         # Load game board
         self.draw_matrice()

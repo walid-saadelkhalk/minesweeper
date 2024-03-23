@@ -1,25 +1,21 @@
 import random
 from Cell import Cell
-
 '''
 Class Grid is a 2D array of cells. Each cell has a state and a position.
 The numbers of cells depends on the difficulty level of the game.
 It allows to create the logical matrice of the game.
 '''
-
 class Grid:
     def __init__(self, level):
         self.__level = level
         self.__matrice = []
         self.__list_cells_objects = []
-
     
     def get_level(self):
         return self.__level
     
     def set_level(self, level):
         self.__level = level
-
     def get_matrice(self):
         return self.__matrice
     
@@ -110,7 +106,6 @@ class Grid:
         self.mine_in_matrice()
         self.fill_number_hint()
 
-
     # Fill the list of cells objects with objetcs of class Cell
     def fill_list_cells_objects(self):
         total_x, total_y = self.matrice_size()
@@ -118,11 +113,3 @@ class Grid:
             for j in range(total_y):
                 cell = Cell(i, j, False)
                 self.__list_cells_objects.append(cell)
-    
-
-
-    
-    
-    
-
-    
