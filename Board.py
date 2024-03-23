@@ -116,11 +116,9 @@ class Board:
                     i, j = cell.get_position()
                     button = Button(i * self.__cell_size, j * self.__cell_size + self.__visual_info_height, Image("./assets/square.png", (i * self.__cell_size, j * self.__cell_size + self.__visual_info_height)).get_image_surface())
                     self.__button_list.append(button)
-            for button in self.__button_list:
-                button.draw(self.__screen)
-            if cell.get_attributes() != 0:
-                    self.render_attributes(cell)
-            pygame.display.update() 
+                    button.draw(self.__screen)
+                    if cell.get_attributes() != 0:
+                            self.render_attributes(cell)
         else:
             print("The screen is not defined 3")
             
@@ -131,6 +129,7 @@ class Board:
             i, j = cell.get_position()
             x = i * 30
             y = j * 30
+            y = y + 50
             button = Button(x, y, Image("./assets/square.png", (x, y)).get_image_surface())
             button.draw(self.__screen)
 
@@ -155,6 +154,5 @@ class Board:
         self.visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
         self.visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
         self.visual_info.add_button(self.__screen.get_width() - self.__cell_size, 8, Image("./assets/question_mark.png", (0, 0)).get_image_surface())
-
         self.visual_info.draw(self.__screen)
 
