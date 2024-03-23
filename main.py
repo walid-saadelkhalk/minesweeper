@@ -17,9 +17,7 @@ while True :
 
     if button_draw == False:
         button_draw = True
-        if cell != None:
-            start_game.render_attributes(cell, screen)
-        start_game.load_board(cell)
+        start_game.load_board()
 
     events = pygame.event.get()
     for event in events:
@@ -29,9 +27,8 @@ while True :
         mouse = MouseClick(event)
         x_left, y_left = mouse.left_click()
         x_right, y_right = mouse.right_click()
-        button_draw, first_click = start_game.get_game().make_a_left_click(x_left, y_left, button_draw, first_click)
+        button_draw = start_game.get_game().make_a_left_click(x_left, y_left, button_draw)
         cell = start_game.get_game().make_a_right_click(x_right, y_right)
-        if cell is not None:
-            start_game.render_attributes(cell, screen)
+        start_game.render_attributes(cell)
 
     pygame.display.flip()
