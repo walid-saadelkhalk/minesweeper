@@ -7,10 +7,17 @@ It allows to manage the game.
 class StateGame:
     def __init__(self, level):
         self.__grid_object = Grid(level)
+        self.__game_running = "en cours"
+
     def get_grid_object(self):
         return self.__grid_object
     def set_grid_object(self, grid_object):
         self.__grid_object = grid_object
+    
+    def get_game_running(self):
+        return self.__game_running
+    def set_game_running(self, game_running):
+        self.__game_running = game_running
 
     # when the player click on a mine
     def lose(self, x, y):
@@ -55,13 +62,13 @@ class StateGame:
                 if self.__grid_object.get_matrice()[x][y] == 0:
                     self.next_move(x, y)
                     if self.win():
-                        print("You win")
+                        self.__game_running = "gagné"
                 elif self.__grid_object.get_matrice()[x][y] == -1:
                     if self.lose(x, y):
-                        print("You lose")
+                        self.__game_running = "perdu"
                 else:
                     if self.win():
-                        print("You win") 
+                        self.__game_running = "gagné"
         return button_draw
 
     # When the player click on a cell with the right click

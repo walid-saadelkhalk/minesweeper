@@ -50,6 +50,7 @@ while True:
             x_left, y_left = mouse.left_click()
             x_right, y_right = mouse.right_click()
             button_draw = game.get_game().make_a_left_click(x_left, y_left, button_draw)
+            game.game_running_render()
             cell = game.get_game().make_a_right_click(x_right, y_right)
             game.render_attributes(cell)
 

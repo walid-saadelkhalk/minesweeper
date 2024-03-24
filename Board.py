@@ -5,23 +5,11 @@ from StateGame import StateGame
 from Button import Button
 from Image import Image
 from VisualInfo import VisualInfo
+import time
 
 """
 class Board for the render of the matrice game 
 """
-
-# SCREEN_WIDTH = 930
-# SCREEN_HEIGHT = 530
-
-# matrice_size = self.__game.get_grid_object().matrice_size()
-# cell_size = 30 
-# screen_width = matrice_size[0] * cell_size +5
-# screen_height = matrice_size[1] * cell_size + 50
-# screen = pygame.display.set_mode((screen_width, screen_height))
-
-# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-
 
 class Board:
     def __init__(self, level):
@@ -155,4 +143,17 @@ class Board:
         self.visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
         self.visual_info.add_button(self.__screen.get_width() - self.__cell_size, 8, Image("./assets/question_mark.png", (0, 0)).get_image_surface())
         self.visual_info.draw(self.__screen)
+    
+    def game_running_render(self):
+        if self.__game.get_game_running() == "gagné":
+            winning_image = Image("./assets/prix.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+            winning_image.draw_image(self.__screen)
+            # time.sleep(2)
+            # return 0
+
+        elif self.__game.get_game_running() == "perdu":
+            loosing_image = Image("./assets/explosion.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+            loosing_image.draw_image(self.__screen)
+            # time.sleep(2)
+            # return 0
 
