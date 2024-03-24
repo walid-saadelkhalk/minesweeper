@@ -18,12 +18,13 @@ class StateGame:
             return True
 
     # when the only cells left are mines
-    def win(self, x, y):
+    def win(self):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_state() == False:
-                if self.__grid_object.get_matrice()[x][y] == -1:
-                    return True
-                return False
+                if self.__grid_object.get_matrice()[cell.get_position()[0]][cell.get_position()[1]] != -1:
+                    return False
+        return True
+
 
     # When the player want to restart the game
     def initialize_game(self):
@@ -53,13 +54,13 @@ class StateGame:
                 button_draw = False
                 if self.__grid_object.get_matrice()[x][y] == 0:
                     self.next_move(x, y)
-                    if self.win(x, y):
+                    if self.win():
                         print("You win")
                 elif self.__grid_object.get_matrice()[x][y] == -1:
                     if self.lose(x, y):
                         print("You lose")
                 else:
-                    if self.win(x, y):
+                    if self.win():
                         print("You win") 
         return button_draw
 
