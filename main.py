@@ -40,6 +40,7 @@ while True:
             game.size_screen()
             game.draw_visual_info()
             game.draw_visual_flag()
+            game.back_menu()
         if not button_draw:
             button_draw = True
             game.load_board()
@@ -54,9 +55,19 @@ while True:
             button_draw = game.get_game().make_a_left_click(x_left, y_left, button_draw)
             game.game_running_render()
             cell = game.get_game().make_a_right_click(x_right, y_right)
+            if game.back_menu() == 1:
+                CURRENT_SCREEN = MENU_SCREEN
+                draw = False
+                menu_draw = False
+                button_draw = False
+                cell = None
+                first_click = False
+                break
             if cell is not None and cell.get_attributes() == 1 : 
                 game.draw_visual_flag()
-            if cell is not None and cell.get_attributes() == 2 : 
+            elif cell is not None and cell.get_attributes() == 2 : 
+                game.draw_visual_flag()
+            elif cell is not None and cell.get_attributes() == 0 :
                 game.draw_visual_flag()
             game.render_attributes(cell)
 
