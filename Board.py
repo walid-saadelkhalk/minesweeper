@@ -133,30 +133,31 @@ class Board:
 
     def draw_visual_info(self):
         self.__visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
-        self.__visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
         self.__visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
+    
+    def back_menu(self):
+        self.__visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
+        self.__visual_info.draw(self.size_screen()) 
+        if self.__visual_info.get_button_list()[1].get_rect().collidepoint(pygame.mouse.get_pos()):
+            return 1
 
-        self.__visual_info.draw(self.size_screen())  
-
+    
     def draw_visual_flag(self):
         flag_count = 0
         interrogation_count = 0
         for cell in self.__game.get_grid_object().get_list_cells_objects():
-            if cell.get_attributes() == 1:
-                flag_count += 1
-            elif cell.get_attributes() == 2:
-                interrogation_count += 1
-            else:
-                continue
+            if cell.get_state() == False:
+                if cell.get_attributes() == 1:
+                    flag_count += 1
+                elif cell.get_attributes() == 2:
+                    interrogation_count += 1
+            
 
         self.__visual_info.set_flag_counter(flag_count)
         self.__visual_info.set_interrogation_counter(interrogation_count)
         print(f"Flag count: {flag_count}")
         print(f"Interrogation count: {interrogation_count}")
         self.__visual_info.draw(self.size_screen())
-
-
-
 
 
     # Load the board with the cells
