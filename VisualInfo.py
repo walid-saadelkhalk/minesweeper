@@ -16,6 +16,8 @@ class VisualInfo:
         self.buttons = []
         self.bomb_counter = 0
         self.timer_value = 0
+        self.flag_counter = 0
+        self.interrogation_counter = 0
 
 
     #method that add a button to the visual info bar
@@ -28,6 +30,19 @@ class VisualInfo:
 
     def set_timer_value(self, value):
         self.timer_value = value
+
+    def set_flag_counter(self, count):
+        self.flag_counter = count
+        return self.flag_counter
+    
+    def get_flag_counter(self):
+        return self.flag_counter    
+    
+    def set_interrogation_counter(self, count):
+        self.interrogation_counter = count
+        
+    def get_interrogation_counter(self):
+        return self.interrogation_counter
 
     #method that draw the visual info bar
     def draw(self, screen):
@@ -51,4 +66,13 @@ class VisualInfo:
         timer_rect = timer_surface.get_rect(midright=(self.screen_width.get_width() - 60 , self.visual_info_height // 2))
         screen.blit(timer_surface, timer_rect)
 
-        
+        #Draw the  flag and interrogation counter
+        flag_text = f"{self.flag_counter}"
+        flag_surface = self.font.render(flag_text, True, (0, 0, 0), (192, 192, 192))
+        flag_rect = flag_surface.get_rect(midleft=(self.screen_width.get_width() - 60, self.visual_info_height // 2))
+        screen.blit(flag_surface, flag_rect)
+
+        interrogation_text = f"{self.interrogation_counter}"
+        interrogation_surface = self.font.render(interrogation_text, True, (0, 0, 0), (192, 192, 192))
+        interrogation_rect = interrogation_surface.get_rect(midleft=(self.screen_width.get_width() , self.visual_info_height // 2))
+        screen.blit(interrogation_surface, interrogation_rect)
