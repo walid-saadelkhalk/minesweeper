@@ -8,6 +8,8 @@ class Cell:
     def __init__(self, x, y, state = False):
         self.__state = state
         self.__position = (x,y)
+        self.__attributes = 0
+
 
     
     def get_state(self):
@@ -19,6 +21,11 @@ class Cell:
         return self.__position
     def set_position(self, position):
         self.__position = position
+
+    def get_attributes(self):
+        return self.__attributes
+    def set_attributes(self, attributes):
+        self.__attributes = attributes
 
 
 

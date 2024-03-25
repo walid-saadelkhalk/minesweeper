@@ -7,6 +7,8 @@ pygame.init()
 draw = False
 menu_draw = False
 button_draw = False
+cell = None
+first_click = False
 
 # Stage of the game
 MENU_SCREEN = 0
@@ -47,7 +49,10 @@ while True:
             mouse = MouseClick(event)
             x_left, y_left = mouse.left_click()
             x_right, y_right = mouse.right_click()
-            button_draw = game.get_game().make_a_click(x_left, y_left, button_draw)
+            button_draw = game.get_game().make_a_left_click(x_left, y_left, button_draw)
+            game.game_running_render()
+            cell = game.get_game().make_a_right_click(x_right, y_right)
+            game.render_attributes(cell)
 
     pygame.display.update()  
 

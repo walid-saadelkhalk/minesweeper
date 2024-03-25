@@ -1,3 +1,4 @@
+
 from collections.abc import Iterable
 import pygame
 from StateGame import StateGame
@@ -7,21 +8,7 @@ from VisualInfo import VisualInfo
 
 """
 class Board for the render of the matrice game 
-
 """
-
-# SCREEN_WIDTH = 930
-# SCREEN_HEIGHT = 530
-
-# matrice_size = self.__game.get_grid_object().matrice_size()
-# cell_size = 30 
-# screen_width = matrice_size[0] * cell_size +5
-# screen_height = matrice_size[1] * cell_size + 50
-# screen = pygame.display.set_mode((screen_width, screen_height))
-
-# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-
 
 class Board:
     def __init__(self, level):
@@ -30,6 +17,9 @@ class Board:
         self.__visual_info_height = 50  
         self.__cell_size = 30
         self.__game = StateGame(level)
+        self.size_screen()
+        self.__visual_info = VisualInfo(self.__screen, self.__visual_info_height)
+
         # dictionnary with the color of the different figures
         self.__FIGURE_COLOR = {
             1: (0, 0, 255),
@@ -45,16 +35,16 @@ class Board:
 
     def get_game(self):
         return self.__game
-
     def get_button_list(self):
         return self.__button_list
     
     def size_screen(self):
-        matrice_size = self.__game.get_grid_object().matrice_size()
-        screen_width = matrice_size[0] * self.__cell_size
-        screen_height = matrice_size[1] * self.__cell_size + self.__visual_info_height
-        self.__screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("Minesweeper")
+        if self.__screen is None:
+            matrice_size = self.__game.get_grid_object().matrice_size()
+            screen_width = matrice_size[0] * self.__cell_size
+            screen_height = matrice_size[1] * self.__cell_size + self.__visual_info_height
+            self.__screen = pygame.display.set_mode((screen_width, screen_height))
+            pygame.display.set_caption("Minesweeper")
         return self.__screen
 
     # Draw the matrice of the game with rect
@@ -76,7 +66,7 @@ class Board:
     # Return the color of the figure depending on the number
     def color_figures(self, number):
         return self.__FIGURE_COLOR[number]
-
+    
     # Draw the hint of the game that give the number of mines around the cell
     def draw_hints(self):
         if self.__screen is not None:
@@ -117,14 +107,60 @@ class Board:
                     i, j = cell.get_position()
                     button = Button(i * self.__cell_size, j * self.__cell_size + self.__visual_info_height, Image("./assets/square.png", (i * self.__cell_size, j * self.__cell_size + self.__visual_info_height)).get_image_surface())
                     self.__button_list.append(button)
-            for button in self.__button_list:
-                button.draw(self.__screen)
-            pygame.display.update() 
+                    button.draw(self.__screen)
+                    if cell.get_attributes() != 0:
+                            self.render_attributes(cell)
         else:
             print("The screen is not defined 3")
+            
+
+    # Render the attributes of the cell
+    def render_attributes(self, cell):
+        if cell is not None:
+            i, j = cell.get_position()
+            x = i * 30
+            y = j * 30
+            y = y + 50
+            button = Button(x, y, Image("./assets/square.png", (x, y)).get_image_surface())
+            button.draw(self.__screen)
+
+            if cell.get_attributes() == 1:
+                image = Image("./assets/flag.png", (x, y))
+                image.draw_image(self.__screen)
+            elif cell.get_attributes() == 2:
+                image = Image("./assets/doubt.png", (x, y))
+                image.draw_image(self.__screen)
+
+    def draw_visual_info(self):
+        self.__visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
+        self.__visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
+        self.__visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
+
+        self.__visual_info.draw(self.size_screen())  
+
+    def draw_visual_flag(self):
+        flag_count = 0
+        interrogation_count = 0
+        for cell in self.__game.get_grid_object().get_list_cells_objects():
+            if cell.get_attributes() == 1:
+                flag_count += 1
+            elif cell.get_attributes() == 2:
+                interrogation_count += 1
+            else:
+                continue
+
+        self.__visual_info.set_flag_counter(flag_count)
+        self.__visual_info.set_interrogation_counter(interrogation_count)
+        print(f"Flag count: {flag_count}")
+        print(f"Interrogation count: {interrogation_count}")
+        self.__visual_info.draw(self.size_screen())
 
 
-    
+
+
+
+    # Load the board with the cells
+
     def load_board(self):
         # Load game board
         self.draw_matrice()
@@ -132,14 +168,17 @@ class Board:
         self.draw_hints()
         self.button_cell()
 
-        # Load visual info bar
-        self.visual_info = VisualInfo(self.__screen, self.__visual_info_height)
-        back_button = self.visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
-        replay_button = self.visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
-        self.visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
-        
+    
+    def game_running_render(self):
+        if self.__game.get_game_running() == "gagné":
+            winning_image = Image("./assets/prix.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+            winning_image.draw_image(self.__screen)
+            # time.sleep(2)
+            # return 0
 
-
-
-        self.visual_info.draw(self.__screen)
+        elif self.__game.get_game_running() == "perdu":
+            loosing_image = Image("./assets/explosion.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+            loosing_image.draw_image(self.__screen)
+            # time.sleep(2)
+            # return 0
 
