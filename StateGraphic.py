@@ -3,6 +3,8 @@ from Button import Button
 from Image import Image
 
 '''
+This class is responsible for the rendering of the menu screen of the game Minesweeper. 
+It contains the buttons for the different difficulties of the game and the method to select a difficulty.
 '''
 
 

@@ -2,6 +2,7 @@ from Board import *
 from MouseClick import MouseClick
 import pygame
 from StateGraphic import StateGraphic
+from VisualInfo import VisualInfo
 
 pygame.init()
 draw = False
@@ -13,7 +14,6 @@ first_click = False
 # Stage of the game
 MENU_SCREEN = 0
 GAME_SCREEN = 1
-
 CURRENT_SCREEN = MENU_SCREEN
 
 while True:
@@ -42,6 +42,7 @@ while True:
             button_draw = True
             game.load_board()
 
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -54,5 +55,7 @@ while True:
             cell = game.get_game().make_a_right_click(x_right, y_right)
             game.render_attributes(cell)
 
+
     pygame.display.update()  
+
 

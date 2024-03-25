@@ -1,5 +1,6 @@
 import pygame
 from Button import Button
+import time
 
 '''
 class visual info for the render of the head bar of the game
@@ -16,7 +17,7 @@ class VisualInfo:
         self.buttons = []
         self.bomb_counter = 0
         self.timer_value = 0
-
+    
 
     #method that add a button to the visual info bar
     def add_button(self, x, y, image, hover_image=None):
@@ -29,6 +30,7 @@ class VisualInfo:
 
     def set_timer_value(self, value):
         self.timer_value = value
+        
 
     #method that draw the visual info bar
     def draw(self, screen):
@@ -50,6 +52,5 @@ class VisualInfo:
         timer_text = f"{self.timer_value}"
         timer_surface = self.font.render(timer_text, True, (0, 0, 0), (192, 192, 192))
         timer_rect = timer_surface.get_rect(midright=(self.screen_width.get_width() - 60 , self.visual_info_height // 2))
-        screen.blit(timer_surface, timer_rect)
+        screen.blit(timer_surface, timer_rect)      
 
-        
