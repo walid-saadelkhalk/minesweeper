@@ -38,6 +38,8 @@ while True:
             game = Board(menu.get_selected_difficulty())
             game.get_game().initialize_game()
             game.size_screen()
+            game.draw_visual_info()
+            game.draw_visual_flag()
         if not button_draw:
             button_draw = True
             game.load_board()
@@ -52,7 +54,12 @@ while True:
             button_draw = game.get_game().make_a_left_click(x_left, y_left, button_draw)
             game.game_running_render()
             cell = game.get_game().make_a_right_click(x_right, y_right)
+            if cell is not None and cell.get_attributes() == 1 : 
+                game.draw_visual_flag()
+            if cell is not None and cell.get_attributes() == 2 : 
+                game.draw_visual_flag()
             game.render_attributes(cell)
+
 
     pygame.display.update()  
 
