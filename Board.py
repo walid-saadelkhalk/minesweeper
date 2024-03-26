@@ -170,16 +170,14 @@ class Board:
         self.button_cell()
 
     
-    def game_running_render(self):
-        if self.__game.get_game_running() == "gagné":
-            winning_image = Image("./assets/prix.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
-            winning_image.draw_image(self.__screen)
-            # time.sleep(2)
-            # return 0
+    def game_running_render(self, first_click):
+        if first_click:
+            if self.__game.get_game_running() == "gagné":
+                winning_image = Image("./assets/prix.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+                winning_image.draw_image(self.__screen)
 
-        elif self.__game.get_game_running() == "perdu":
-            loosing_image = Image("./assets/explosion.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
-            loosing_image.draw_image(self.__screen)
-            # time.sleep(2)
-            # return 0
+
+            elif self.__game.get_game_running() == "perdu":
+                loosing_image = Image("./assets/explosion.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
+                loosing_image.draw_image(self.__screen)
 
