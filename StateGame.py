@@ -54,22 +54,31 @@ class StateGame:
                                     self.next_move(i, j)
                             
     # When the player click on a cell
-    def make_a_left_click(self, x, y, button_draw):
+    def make_a_left_click(self, x, y, button_draw, first_click):
         for cell in self.__grid_object.get_list_cells_objects():
             if cell.get_position() == (x, y) and cell.get_state() == False:
-                cell.set_state(True)
-                button_draw = False
-                if self.__grid_object.get_matrice()[x][y] == 0:
-                    self.next_move(x, y)
-                    if self.win():
-                        self.__game_running = "gagné"
-                elif self.__grid_object.get_matrice()[x][y] == -1:
-                    if self.lose(x, y):
-                        self.__game_running = "perdu"
+                if first_click == 0:
+                    for i in range(x-1, x+2):
+                        for j in range(y-1, y+2):
+                            for cell in self.__grid_object.get_list_cells_objects():
+                                if cell.get_position() == (i, j):
+                                    cell.set_state(True)
+                                    button_draw = False
+                                    first_click = 1
                 else:
-                    if self.win():
-                        self.__game_running = "gagné"
-        return button_draw
+                    cell.set_state(True)
+                    button_draw = False
+                    if self.__grid_object.get_matrice()[x][y] == 0:
+                        self.next_move(x, y)
+                        if self.win():
+                            self.__game_running = "gagné"
+                    elif self.__grid_object.get_matrice()[x][y] == -1:
+                        if self.lose(x, y):
+                            self.__game_running = "perdu"
+                    else:
+                        if self.win():
+                            self.__game_running = "gagné"
+        return button_draw, first_click
 
     # When the player click on a cell with the right click
     def make_a_right_click(self, x, y):
