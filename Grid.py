@@ -72,10 +72,12 @@ class Grid:
         for i in range(mine_number):
             x = random.randint(0, total_x-1)
             y = random.randint(0, total_y-1)
-            if self.__matrice[x][y] != -1:
-                self.__matrice[x][y] = -1
-            else:
-                i -= 1
+            for cell in self.__list_cells_objects:
+                if cell.get_position() == (x, y) and cell.get_state() == False:    
+                    if self.__matrice[x][y] != -1:
+                        self.__matrice[x][y] = -1
+                    else:
+                        i -= 1
 
     # Fill the matrice with the hint number around each cell clicked
     def fill_number_hint(self):
