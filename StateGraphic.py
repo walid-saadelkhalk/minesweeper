@@ -7,8 +7,6 @@ This class is used to create the window menu of the game
 we can choose the difficulty of the game
 '''
 
-
-
 class StateGraphic():
     def __init__(self):
         self.__button_list = []

@@ -2,6 +2,8 @@ from Board import *
 from MouseClick import MouseClick
 import pygame
 from StateGraphic import StateGraphic
+from timer import chrono
+import time
 
 pygame.init()
 draw = False
@@ -9,6 +11,7 @@ menu_draw = False
 button_draw = False
 cell = None
 first_click = 0
+time_start = False
 
 # Stage of the game
 MENU_SCREEN = 0
@@ -33,6 +36,10 @@ while True:
 
     # Game screen where we can play the game
     elif CURRENT_SCREEN == GAME_SCREEN:
+        if time_start == False:
+            time_start = True
+            time_begin = time.time()
+
         if not draw and first_click == 0:
             game = Board(menu.get_selected_difficulty())
             game.get_game().get_grid_object().set_matrice([])
@@ -49,6 +56,7 @@ while True:
             game.get_game().get_grid_object().fill_number_hint()
             first_click = 2
 
+        game.draw_timer(time_begin)
         draw = True
 
         if not button_draw:

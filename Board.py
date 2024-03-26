@@ -4,6 +4,7 @@ from StateGame import StateGame
 from Button import Button
 from Image import Image
 from VisualInfo import VisualInfo
+from timer import chrono
 
 """
 class Board for the render of the matrice game 
@@ -135,13 +136,18 @@ class Board:
     # Draw the visual information of the game bomb counter and the smiley
     def draw_visual_info(self):
         self.__visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
-        self.__visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
+        # self.__visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
     
+    def draw_timer(self, time_begin):
+        seconds = chrono(time_begin)
+        self.__visual_info.set_timer_value(seconds)
+        self.__visual_info.draw(self.size_screen())
+
     # Draw the back button
     def back_menu(self):
         self.__visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
         self.__visual_info.draw(self.size_screen()) 
-        if self.__visual_info.get_button_list()[1].get_rect().collidepoint(pygame.mouse.get_pos()):
+        if self.__visual_info.get_button_list()[0].get_rect().collidepoint(pygame.mouse.get_pos()):
             return 1
 
     # Draw the flag and interrogation counter 

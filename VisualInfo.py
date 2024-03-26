@@ -64,11 +64,11 @@ class VisualInfo:
         bomb_rect = bomb_surface.get_rect(midleft=(60, self.visual_info_height // 2))
         screen.blit(bomb_surface, bomb_rect)
 
-        # # Draw timer
-        # timer_text = f"{self.timer_value}"
-        # timer_surface = self.font.render(timer_text, True, (0, 0, 0), (192, 192, 192))
-        # timer_rect = timer_surface.get_rect(midright=(self.screen_width.get_width() - 60 , self.visual_info_height // 2))
-        # screen.blit(timer_surface, timer_rect)
+        # Draw timer
+        timer_text = f"{self.timer_value}"
+        timer_surface = self.font.render(timer_text, True, (0, 0, 0), (192, 192, 192))
+        timer_rect = timer_surface.get_rect(midright=(self.screen_width.get_width() // 2 , self.visual_info_height // 2))
+        screen.blit(timer_surface, timer_rect)
 
         #Draw the  flag and interrogation counter
         flag_text = f"{self.flag_counter}"
