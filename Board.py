@@ -1,5 +1,4 @@
 
-from collections.abc import Iterable
 import pygame
 from StateGame import StateGame
 from Button import Button
@@ -38,6 +37,7 @@ class Board:
     def get_button_list(self):
         return self.__button_list
     
+    # draw the screen of the game in terms of the matrice size
     def size_screen(self):
         if self.__screen is None:
             matrice_size = self.__game.get_grid_object().matrice_size()
@@ -99,6 +99,7 @@ class Board:
         else:
             print("The screen is not defined 2")
 
+    # Draw the gray button cells over the matrice 
     def button_cell(self):
         if self.__screen is not None:
             self.__button_list = []
@@ -131,17 +132,19 @@ class Board:
                 image = Image("./assets/doubt.png", (x, y))
                 image.draw_image(self.__screen)
 
+    # Draw the visual information of the game bomb counter and the smiley
     def draw_visual_info(self):
         self.__visual_info.set_bomb_counter(self.__game.get_grid_object().mine_number())
         self.__visual_info.add_button((self.__screen.get_width() // 2  - 15), 8, Image("./assets/smiley_ok.png", (0, 0)).get_image_surface())
     
+    # Draw the back button
     def back_menu(self):
         self.__visual_info.add_button(0, 8, Image("./assets/back.png", (0, 0)).get_image_surface())
         self.__visual_info.draw(self.size_screen()) 
         if self.__visual_info.get_button_list()[1].get_rect().collidepoint(pygame.mouse.get_pos()):
             return 1
 
-    
+    # Draw the flag and interrogation counter 
     def draw_visual_flag(self):
         flag_count = 0
         interrogation_count = 0
@@ -169,14 +172,13 @@ class Board:
         self.draw_hints()
         self.button_cell()
 
-    
+    # Winning and loosing render 
     def game_running_render(self, first_click):
+
         if first_click:
             if self.__game.get_game_running() == "gagné":
                 winning_image = Image("./assets/prix.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
                 winning_image.draw_image(self.__screen)
-
-
             elif self.__game.get_game_running() == "perdu":
                 loosing_image = Image("./assets/explosion.png", (self.__screen.get_width() // 2 - 60, self.__screen.get_height() // 2 - 60))
                 loosing_image.draw_image(self.__screen)

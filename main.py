@@ -35,9 +35,7 @@ while True:
     elif CURRENT_SCREEN == GAME_SCREEN:
         if not draw and first_click == 0:
             game = Board(menu.get_selected_difficulty())
-            # game.get_game().initialize_game()
             game.get_game().get_grid_object().set_matrice([])
-            # game.get_game().get_grid_object().filled_matrice()
             game.get_game().get_grid_object().initial_matrice()
             game.get_game().get_grid_object().set_list_cells_objects([])
             game.get_game().get_grid_object().fill_list_cells_objects()

@@ -20,6 +20,7 @@ class Button():
     def draw(self, surface):
         surface.blit(self.__image, self.__rect)
 
+    # Method that return True if the button is clicked
     def get_clicked(self, mouse_pos, mouse_event):
         if mouse_event.type == pygame.MOUSEBUTTONDOWN and mouse_event.button == 1: 
             if self.__rect.collidepoint(mouse_pos):

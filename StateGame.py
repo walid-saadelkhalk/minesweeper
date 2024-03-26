@@ -1,5 +1,6 @@
 from Grid import Grid
-from MouseClick import MouseClick
+
+
 '''
 This class is the state of the game. It contains the grid object and the mouse click object.
 It allows to manage the game.

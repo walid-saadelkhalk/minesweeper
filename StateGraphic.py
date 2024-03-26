@@ -3,6 +3,8 @@ from Button import Button
 from Image import Image
 
 '''
+This class is used to create the window menu of the game
+we can choose the difficulty of the game
 '''
 
 
@@ -21,7 +23,7 @@ class StateGraphic():
     def set_selected_difficulty(self, difficulty):
         self.__selected_difficulty = difficulty
 
-    
+    # Method that draw the menu of the game
     def draw_menu(self):
         SCREEN_WIDTH_MENU = 930
         SCREEN_HEIGHT_MENU = 530
@@ -41,6 +43,7 @@ class StateGraphic():
             button.draw(screen_menu)
 
 
+    # Method that return the difficulty selected by the player
     def selected_difficulty(self, mouse):
         difficulties = ["easy", "medium", "hard"]
         for i in range(len(self.__button_list)): 
